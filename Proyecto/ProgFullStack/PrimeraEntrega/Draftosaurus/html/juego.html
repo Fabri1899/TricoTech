@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draftosaurus - Modo Juego</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="barra-navegacion">
+        <input type="checkbox" class="toggle-hamburguesa" id="toggle-hamburguesa">
+        <label for="toggle-hamburguesa" class="hamburguesa">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="como-jugar.html">¿Cómo jugar?</a></li>
+            <li><a href="resultados.html">Resultados</a></li>
+            <li><a href="mi-cuenta.html"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+    </nav>
+    
+    <div class="contenedor-tablero">
+        <div class="recinto EPDLI drop-target" data-max="6" style="top: 18%; left: 22%;">
+            <span class="etiqueta-recinto">A</span>
+        </div>
+        <div class="recinto ETDLB drop-target" data-max="3" style="top: 48%; left: 19%;">
+            <span class="etiqueta-recinto">B</span>
+        </div>
+        <div class="recinto LPDA drop-target" data-max="6" style="top: 79%; left: 25%;">
+            <span class="etiqueta-recinto">C</span>
+        </div>
+        <div class="recinto ERDLS drop-target" data-max="1" style="top: 16%; left: 72%;">
+            <span class="etiqueta-recinto">D</span>
+        </div>
+        <div class="recinto LLDLD drop-target" data-max="6" style="top: 50%; left: 76%;">
+            <span class="etiqueta-recinto">E</span>
+        </div>
+        <div class="recinto LIS drop-target" data-max="1" style="top: 75%; left: 83%;">
+            <span class="etiqueta-recinto">F</span>
+        </div>
+        <div class="recinto ER drop-target" data-max="6" style="top: 86%; left: 55%;">
+            <span class="etiqueta-recinto">G</span>
+        </div>
+    </div>
+    
+    <div id="contenedor-dinosaurio">
+        <div class="arrastrable" draggable="true" id="square1"></div>
+        <div class="arrastrable" draggable="true" id="square2"></div>
+        <div class="arrastrable" draggable="true" id="square3"></div>
+        <div class="arrastrable" draggable="true" id="square4"></div>
+        <div class="arrastrable" draggable="true" id="square5"></div>
+        <div class="arrastrable" draggable="true" id="square6"></div>
+    </div>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html> 
