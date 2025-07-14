@@ -168,9 +168,11 @@ iii. Modularidad y escalabilidad
 
 #### Configuración inicial de Git
 ```bash
-git init
+git clone https://github.com/Fabri1899/TricoTech
+cd TricoTech
 git config user.name "Tu Nombre"
 git config user.email "tu-email@ejemplo.com"
+    # Para realizar cambios
 git add .
 git commit -m "feat: inicializar proyecto Draftosaurus"
 git push origin main
