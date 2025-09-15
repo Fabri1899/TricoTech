@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draftosaurus - Inicio</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="barra-navegacion">
+        <input type="checkbox" class="toggle-hamburguesa" id="toggle-hamburguesa">
+        <label for="toggle-hamburguesa" class="hamburguesa">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul>
+            <li><a href="#" class="active">Inicio</a></li>
+            <li><a href="como-jugar.html">¿Cómo jugar?</a></li>
+            <li><a href="resultados.html">Resultados</a></li>
+            <li><a href="mi-cuenta.html"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+    </nav>
+    
+    <div class="contenedor">
+        <div id="contenido-bienvenida">
+            <h1>Bienvenido a Draftosaurus!</h1>
+            <p>Preparate para jugar y divertirte</p>
+            <button onclick="mostrarModosJuego()">Comenzar Juego</button>
+        </div>
+        
+        <div id="modos-juego" style="display: none;">
+            <h2>Elegir modo de juego</h2>
+            <div class="botones-modos">
+                <button class="btn-modo" onclick="seleccionarModo('juego')">Modo Juego</button>
+                <button class="btn-modo" onclick="seleccionarModo('seguimiento')">Modo Seguimiento</button>
+            </div>
+            <button class="btn-volver" onclick="volverInicio()">Volver</button>
+        </div>
+    </div>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html>
+
+
+
+
+<!-- Del bolso soy y vos sos la alegría de mi corazón
+Vos sos mi vida, vos sos mi pasiooon
+Daria la vida por salir campeoooon
+Y a mi no me interesa en que cancha juegues
+Local o visitante yo te vengo a ver
+Ni la muerte nos va a separar
+Desde el cielo te voy a alentar -->

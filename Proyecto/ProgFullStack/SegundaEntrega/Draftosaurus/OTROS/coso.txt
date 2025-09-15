@@ -1,0 +1,22 @@
+al crear una partida necisto crear una bolsa la cual va a tener x cantidad segun los jugadores
+que sean, en principio 2, asique son 48 dinosaurios 8 de cada especie. 
+
+ciclo de las partidas es: 
+
+1- Crear partida, se crea una bag con los dinosaurios
+2- Se reparten al azar 6 dinosaurios
+3- Empieza el jugador con el seat 1, es el admin de la partida, el q la crea
+4- 
+
+
+se loguea el admin, le da en inicar juego, elije cant de jugadores, inician sesion el resto.
+se da click en iniciar partida, crear partida y bag guardando las id de los jugadores obtenidas 
+de la base de datos, se crea la bag con los dinosaurios y se reparten 6 a cada jugador 
+de manera random, jugador 1 tira el dado, elije un dinosaurio y lo coloca, el jugador 2
+elije dinosaurio y lo coloca, los jugadores rotan a la izquierda los dinosaurios que les 
+quedan en la mano, jugador 2 tira el dado, elije un dinosaurio y lo coloca, jugador 1 
+elije dinosaurio y lo coloca, los jugadores rotan a la izquierda los dinosaurios que les
+quedan en la mano, jugador 1 tira el dado, asi hasta que los jugadors se queden sin dinosaurios
+en la mano, en ese momento se reparten 6 dinosaurios mas a cada jugador y se repite el ciclo
+hasta que la bolsa quede vacia, en ese momento se termina la partida y se cuentan los puntos
+de cada jugador, el que tenga mas puntos gana.

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Draftosaurus</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/script.js"></script>
+</head>
+<body>
+    <nav class="barra-navegacion">
+        <input type="checkbox" class="toggle-hamburguesa" id="toggle-hamburguesa">
+        <label for="toggle-hamburguesa" class="hamburguesa">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="como-jugar.html">¿Cómo jugar?</a></li>
+            <li><a href="resultados.html">Resultados</a></li>
+            <li><a href="mi-cuenta.html" class="active" title="Mi Cuenta"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+    </nav>
+    
+    <div class="contenedor-cuenta">
+        <div class="pestanas-formulario">
+            <button class="btn-pestana active" onclick="mostrarFormulario('login')">Iniciar Sesión</button>
+            <button class="btn-pestana" onclick="mostrarFormulario('registro')">Registrarse</button>
+        </div>
+        
+        <div id="formulario-login" class="formulario">
+            <h2>Iniciar Sesión</h2>
+            <form>
+                <div class="grupo-formulario">
+                    <label for="email-login">Email:</label>
+                    <input type="email" id="email-login" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="password-login">Contraseña:</label>
+                    <input type="password" id="password-login" required>
+                </div>
+                <button type="submit" class="btn-principal">Iniciar Sesión</button>
+            </form>
+        </div>
+        
+        <div id="formulario-registro" class="formulario" style="display: none;">
+            <h2>Crear Cuenta</h2>
+            <form>
+                <div class="grupo-formulario">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="email-registro">Email:</label>
+                    <input type="email" id="email-registro" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="password-registro">Contraseña:</label>
+                    <input type="password" id="password-registro" required>
+                </div>
+                <div class="grupo-formulario">
+                    <label for="confirmar-password">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmar-password" required>
+                </div>
+                <button type="submit" class="btn-principal">Registrarse</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html> 
