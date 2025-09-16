@@ -1,0 +1,28 @@
+/* =========================
+   BOTONES GENERALES
+   ========================= */
+button,
+.btn-modo,
+.btn-volver,
+.btn-principal,
+.btn-pestana {
+    background-color: #2d3a4b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+.btn-modo:hover,
+.btn-volver:hover,
+.btn-principal:hover,
+.btn-pestana:hover {
+    background-color: #1b2532;
+}
+
+.btn-modo { margin: 5px; }
+.btn-volver { margin-top: 15px; display: inline-block; }
+.btn-pestana { margin: 5px; }

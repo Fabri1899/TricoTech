@@ -1,0 +1,34 @@
+/* =========================
+   ESTILOS BASE Y GENERALES
+   ========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: url('../images/backgrounds/background.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+h1, h2 {
+    font-size: 1.2em;
+    color: #2d3a4b;
+    margin: 0 0 1rem 0;
+}
+
+.contenedor,
+.contenedor-cuenta {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    max-width: 98vw;
+    margin: 16px auto;
+    padding: 12px 4px;
+    text-align: center;
+}

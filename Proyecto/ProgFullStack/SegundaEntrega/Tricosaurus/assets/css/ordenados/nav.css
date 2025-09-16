@@ -1,0 +1,48 @@
+/* =========================
+   BARRA DE NAVEGACIÓN
+   ========================= */
+.barra-navegacion {
+    background-color: #2d3a4b;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.barra-navegacion ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.barra-navegacion a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.barra-navegacion a:hover,
+.barra-navegacion a.active {
+    background-color: #1b2532;
+    border-radius: 5px;
+}
+
+/* Menú Hamburguesa */
+.toggle-hamburguesa {
+    display: none;
+}
+
+.hamburguesa {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburguesa span {
+    height: 3px;
+    width: 25px;
+    background: white;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}

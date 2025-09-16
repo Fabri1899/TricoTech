@@ -1,0 +1,25 @@
+/* =========================
+   PÁGINA "CÓMO JUGAR"
+   ========================= */
+.cuerpo-como-jugar {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+    max-width: 800px;
+}
+
+.encabezado-como-jugar {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+
+.seccion-como-jugar {
+    margin-bottom: 15px;
+}
+
+.nota-como-jugar {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #444;
+}

@@ -1,0 +1,40 @@
+/* =========================
+   FORMULARIOS
+   ========================= */
+.formulario {
+    display: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: auto;
+}
+
+.formulario:target {
+    display: block;
+}
+
+#formulario-login {
+    display: block;
+}
+
+.formulario h2 {
+    margin-top: 0;
+}
+
+.grupo-formulario {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.grupo-formulario label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.grupo-formulario input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
