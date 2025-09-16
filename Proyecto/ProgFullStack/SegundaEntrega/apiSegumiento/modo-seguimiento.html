@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tablero de Dinosaurios</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="container">
+
+  <h3>Seleccione Cant.Jugadores</h3>
+  <label for="selectJugadores">Cantidad de jugadores:</label>
+  <select id="selectJugadores">
+    <option value="2">2 jugadores</option>
+    <option value="3">3 jugadores</option>
+    <option value="4">4 jugadores</option>
+    <option value="5">5 jugadores</option>
+  </select>
+
+
+  <h3>Opciones de Ronda</h3>
+  <select id="selectRonda" class="form-select w-25 mb-3"></select>
+  <div class="mb-3">
+    <button class="btn btn-primary" onclick="guardarRonda()">Guardar Ronda</button>
+    <button class="btn btn-warning" onclick="deshacerCambio()">Deshacer</button>
+    <button class="btn btn-danger" onclick="restaurarRonda()">Restaurar</button>
+  </div>
+
+  <h5>Dinosaurios disponibles</h5>
+  <div id="contenedor-dinosaurio" class="d-flex gap-2 mb-3 flex-wrap"></div>
+
+  <h5>SAME_FOREST</h5>
+  <div class="subrecinto" id="SAME_FOREST">
+    <div class="slot" data-valor="2"></div>
+    <div class="slot" data-valor="4"></div>
+    <div class="slot" data-valor="8"></div>
+    <div class="slot" data-valor="12"></div>
+    <div class="slot" data-valor="18"></div>
+    <div class="slot" data-valor="24"></div>
+  </div>
+
+  <h5>DIFFERENT_MEADOW</h5>
+  <div class="subrecinto" id="DIFFERENT_MEADOW">
+    <div class="slot" data-valor="1"></div>
+    <div class="slot" data-valor="3"></div>
+    <div class="slot" data-valor="6"></div>
+    <div class="slot" data-valor="10"></div>
+    <div class="slot" data-valor="15"></div>
+    <div class="slot" data-valor="21"></div>
+  </div>
+
+  <h5>KING</h5>
+  <div class="recinto" id="KING">
+    <div class="slot"></div>
+  </div>
+  <label>
+    <input type="checkbox" id="kingCheck"> ¿Tienes al rey de la selva?
+  </label>
+
+  <h5>TRIO_TREES</h5>
+  <div class="recinto" id="TRIO_TREES">
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+  </div>
+
+  <h5>LONELY</h5>
+  <div class="recinto" id="LONELY">
+    <div class="slot"></div>
+  </div>
+
+  <h5>LOVE_MEADOW</h5>
+  <div class="recinto" id="LOVE_MEADOW">
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+  </div>
+
+  <h5>RIVER</h5>
+  <div class="recinto" id="RIVER">
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+    <div class="slot"></div>
+  </div>
+
+  <h3>Puntajes</h3>
+  <div id="puntajes" class="puntajes-container"></div>
+
+  <h3>GUARDAR Y CARGAR PARTIDA</h3>
+<button id="btnGuardarPartida">Guardar partida</button>
+<button id="btnRestaurarPartida">Cargar partida</button>
+
+
+<div id="partidasDisponibles"></div>
+
+
+
+
+  <!-- <script>
+// Variables globales
+let cantRondas = 2;
+let rondaActual = 1;
+let historialMovimientos = [];
+let puntajesPorRonda = {};
+let estadoPorRonda = {};
+let draggables = [
+  {id:"SPECIE_1", img:"ACA VA EL LINK DE LA IMAGEN 1"},
+  {id:"SPECIE_2", img:"ACA VA EL LINK DE LA IMAGEN 2"},
+  {id:"SPECIE_3", img:"ACA VA EL LINK DE LA IMAGEN 3"},
+  {id:"SPECIE_4", img:"ACA VA EL LINK DE LA IMAGEN 3"},
+  {id:"SPECIE_5", img:"ACA VA EL LINK DE LA IMAGEN 3"},
+  {id:"SPECIE_6", img:"ACA VA EL LINK_DE_LA_IMAGEN_4"}
+];
+
+// Inicializar select de rondas
+const selectRonda = document.getElementById("selectRonda");
+for(let i=1;i<=cantRondas;i++){
+  const opt=document.createElement("option");
+  opt.value=i; opt.textContent="Ronda "+i;
+  selectRonda.appendChild(opt);
+}
+
+// Generar draggables
+function generarDraggables(ids=null){
+  const cont = document.getElementById("contenedor-dinosaurio");
+  cont.innerHTML="";
+  let array = ids? draggables.filter(d=>ids.includes(d.id)) : draggables;
+  array.forEach(d=>{
+    const div=document.createElement("div");
+    div.className="arrastrable";
+    div.draggable=true;
+    div.id=d.id+"_"+Math.floor(Math.random()*10000);
+    div.dataset.especie=d.id;
+    div.innerHTML=`<img src="${d.img}">`;
+    div.addEventListener("dragstart", dragStart);
+    cont.appendChild(div);
+  });
+}
+
+// Drag & Drop
+function dragStart(e){ e.dataTransfer.setData("text/plain", e.target.id); }
+
+function dropRecinto(e, recintoId){
+  e.preventDefault();
+  const data = e.dataTransfer.getData("text/plain");
+  const dragged = document.getElementById(data);
+  const rec = document.getElementById(recintoId);
+
+  // Limite de dinosaurios
+  let maxDinos = (cantRondas==2)?3:6;
+  if(rec.children.length >= maxDinos){
+    alert("Ya se pusieron los dinosaurios necesarios");
+    return;
+  }
+
+  // Reglas KING y LONELY
+  if(recintoId=="KING" || recintoId=="LONELY"){
+    if(rec.children.length>=1){
+      alert("Solo se puede agregar un dinosaurio");
+      return;
+    }
+  }
+
+  // SAME_FOREST: misma especie
+  if(recintoId=="SAME_FOREST" && rec.children.length>0){
+    if(dragged.dataset.especie !== rec.children[0].dataset.especie){
+      alert("Esta mal colocado, lee las reglas mano");
+      document.getElementById("contenedor-dinosaurio").appendChild(dragged);
+      return;
+    }
+  }
+
+  // DIFFERENT_MEADOW: todas diferentes
+  if(recintoId=="DIFFERENT_MEADOW"){
+    const especiesActuales = Array.from(rec.children).map(c=>c.dataset.especie);
+    if(especiesActuales.includes(dragged.dataset.especie)){
+      alert("Esta mal colocado, lee las reglas mano");
+      document.getElementById("contenedor-dinosaurio").appendChild(dragged);
+      return;
+    }
+  }
+
+  rec.appendChild(dragged);
+  historialMovimientos.push({draggable: dragged, slot: rec});
+}
+
+// Asignar drop
+["KING","TRIO_TREES","LONELY","LOVE_MEADOW","RIVER","SAME_FOREST","DIFFERENT_MEADOW"].forEach(id=>{
+  const rec = document.getElementById(id);
+  rec.addEventListener("dragover", e=>e.preventDefault());
+  rec.addEventListener("drop", e=>dropRecinto(e,id));
+});
+
+// Guardar puntaje
+function guardarRonda(){
+  let total=0;
+  let estado={};
+  // SAME_FOREST y DIFFERENT_MEADOW
+  ["SAME_FOREST","DIFFERENT_MEADOW"].forEach(id=>{
+    const slots = Array.from(document.getElementById(id).children);
+    let ultima = 0;
+    let ids = [];
+    slots.forEach(s=>{
+      if(s.children.length>0){
+        if(s.dataset.valor) ultima = parseInt(s.dataset.valor);
+        ids.push(s.children[0].id);
+      }
+    });
+    total += ultima;
+    estado[id]=ids;
+  });
+  // KING
+  const king = document.getElementById("KING");
+  estado["KING"] = Array.from(king.children).map(c=>c.id);
+  if(king.children.length>0) total+=7;
+
+  // TRIO_TREES
+  const trio = document.getElementById("TRIO_TREES");
+  estado["TRIO_TREES"] = Array.from(trio.children).map(c=>c.id);
+  if(trio.children.length===3) total+=7;
+
+  // LONELY
+  const lonely = document.getElementById("LONELY");
+  estado["LONELY"] = Array.from(lonely.children).map(c=>c.id);
+  if(lonely.children.length>=1) total+=7;
+
+  // LOVE_MEADOW
+  const love = document.getElementById("LOVE_MEADOW");
+  estado["LOVE_MEADOW"] = Array.from(love.children).map(c=>c.id);
+  const especiesCount={};
+  Array.from(love.children).forEach(c=>{
+    especiesCount[c.dataset.especie]=(especiesCount[c.dataset.especie]||0)+1;
+  });
+  Object.values(especiesCount).forEach(v=>{
+    total+=Math.floor(v/2)*5;
+  });
+
+  // RIVER
+  const river = document.getElementById("RIVER");
+  estado["RIVER"] = Array.from(river.children).map(c=>c.id);
+  total += river.children.length;
+
+  puntajesPorRonda["Ronda "+rondaActual]=total;
+  estadoPorRonda["Ronda "+rondaActual]=estado;
+
+  mostrarPuntajes();
+}
+
+// Mostrar puntajes
+function mostrarPuntajes(){
+  const div = document.getElementById("puntajes");
+  div.innerHTML="";
+  for(let r in puntajesPorRonda){
+    div.innerHTML += r+": "+puntajesPorRonda[r]+" puntos<br>";
+  }
+}
+
+// Deshacer
+function deshacerCambio(){
+  const ultimo=historialMovimientos.pop();
+  if(ultimo) document.getElementById("contenedor-dinosaurio").appendChild(ultimo.draggable);
+}
+
+// Restaurar
+function restaurarRonda(){
+  historialMovimientos=[];
+  const recintos = ["SAME_FOREST","DIFFERENT_MEADOW","KING","TRIO_TREES","LONELY","LOVE_MEADOW","RIVER"];
+  recintos.forEach(id=>document.getElementById(id).innerHTML='');
+
+  const estado = estadoPorRonda["Ronda "+rondaActual];
+  if(estado){
+    recintos.forEach(id=>{
+      const rec = document.getElementById(id);
+      if(estado[id]){
+        estado[id].forEach(dId=>{
+          const especie = dId.split("_")[0]+"_"+dId.split("_")[1];
+          const imgObj = draggables.find(d=>d.id===especie);
+          const div=document.createElement("div");
+          div.className="arrastrable";
+          div.draggable=true;
+          div.id=dId;
+          div.dataset.especie=especie;
+          div.innerHTML=`<img src="${imgObj ? imgObj.img : 'ACA VA EL LINK DE LA IMAGEN'}">`;
+          div.addEventListener("dragstart", dragStart);
+          rec.appendChild(div);
+        });
+      }
+    });
+  }
+  generarDraggables();
+}
+
+// Cambio de ronda
+selectRonda.addEventListener("change", e=>{
+  rondaActual=parseInt(e.target.value);
+  restaurarRonda();
+});
+
+// Inicial
+generarDraggables();
+</script> -->
+
+  <script src="script.js"></script>
+
+
+</body>
+
+</html>

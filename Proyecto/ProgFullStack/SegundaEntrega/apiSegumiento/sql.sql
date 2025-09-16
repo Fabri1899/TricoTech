@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS prueba;
+USE prueba;
+
+CREATE TABLE partidas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cant_jugadores INT NOT NULL,
+    cant_rondas INT NOT NULL,
+    datos JSON NOT NULL,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
