@@ -1,0 +1,48 @@
+/* =========================
+   SECCIÓN RESULTADOS <-- SIN USO POR AHORA -->
+   ========================= */
+   
+.botones-modos,
+.pestanas-formulario,
+.modos-resultados,
+.filtros,
+.lista-resultados {
+    margin-top: 15px;
+}
+
+.item-resultado {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 12px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+
+.encabezado-resultado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.estado {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #444;
+}
+
+.detalles-resultado {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.estadisticas-juego,
+.estadisticas-seguimiento {
+    margin-top: 20px;
+}
+
+.cuadricula-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+}

@@ -1,0 +1,89 @@
+proyecto-web/
+│
+├── index.php                      # Página principal
+├── .htaccess                      # Configuración de Apache (opcional)
+├── composer.json                  # Dependencias de PHP (si se usan)
+
+
+
+
+│
+├── assets/                        # Todos los recursos estáticos
+│   ├── css/                       # Hojas de estilo
+│   │   ├── main.css               # Estilo principal
+│   │   ├── components/            # Estilos de componentes
+│   │   │   ├── buttons.css
+│   │   │   ├── forms.css
+│   │   │   └── header.css
+│   │   └── vendors/               # Librerías externas (Bootstrap, etc.)
+│   │
+│   ├── js/                        # JavaScript
+│   │   ├── main.js                # JS principal
+│   │   ├── modules/               # Módulos JS
+│   │   │   ├── api.js
+│   │   │   └── utils.js
+│   │   └── vendors/               # Librerías externas (jQuery, etc.)
+│   │
+│   ├── images/                    # Imágenes
+│   │   ├── icons/                 # Iconos
+│   │   ├── logos/                 # Logotipos
+│   │   └── backgrounds/           # Imágenes de fondo
+│   │
+│   └── fonts/                     # Fuentes personalizadas
+
+
+
+
+│
+├── inc/                           # Includes de PHP
+│   ├── config/                    # Configuración
+│   │   ├── database.php           # Configuración de BD
+│   │   └── settings.php           # Configuración general
+│   │
+│   └── templates/                 # Componentes reutilizables
+│       ├── header.php
+│       ├── footer.php
+│       ├── navigation.php
+│       └── sidebar.php
+
+
+
+
+
+│
+├── src/                           # Lógica de la aplicación (PHP)
+│   ├── controllers/               # Controladores
+│   ├── repositories/              # Modelos de datos
+│   └── services/                  # Servicios (lógica de negocio)
+
+
+│
+├── pages/                         # Páginas específicas
+│   ├── about.php                  # Acerca de
+│   ├── contact.php                # Contacto
+│   ├── products/                  # Páginas de productos
+│   │   ├── index.php
+│   │   └── detail.php
+│   └── user/                      # Área de usuario
+│       ├── login.php
+│       ├── register.php
+│       └── profile.php
+
+
+
+│
+├── admin/                         # Panel de administración
+│   ├── index.php
+│   ├── dashboard.php
+│   └── manage-
+│       ├── users.php
+│       └── content.php
+│
+│
+└── api/                           # Endpoints API
+    ├── v1/                        # Versión 1 de la API
+    │   ├── users.php
+    │   └── products.php
+    └── .htaccess                  # Configuración específica para API
+
+
