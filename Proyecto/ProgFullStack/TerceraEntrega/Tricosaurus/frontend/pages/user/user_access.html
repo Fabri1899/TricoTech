@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta - Draftosaurus</title>
+    <link rel="icon" type="image/png" href="http://localhost:8012/Tricosaurus/frontend/assets/images/logos/logo.png">
+    <link rel="stylesheet" href="http://localhost:8012/Tricosaurus/frontend/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <nav class="barra-navegacion">
+        <input type="checkbox" class="toggle-hamburguesa" id="toggle-hamburguesa">
+        <label for="toggle-hamburguesa" class="hamburguesa">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul>
+            <li><a href="../../index.html">Inicio</a></li>
+            <li><a href="../howPlay.html">¿Cómo jugar?</a></li>
+            <li><a href="#" id="cuenta-link" class="active" title="Mi Cuenta"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <div class="contenedor-cuenta">
+            <div class="pestanas-formulario">
+                <button class="btn-pestana active" onclick="mostrarFormulario('login')">Iniciar Sesión</button>
+                <button class="btn-pestana" onclick="mostrarFormulario('registro')">Registrarse</button>
+            </div>
+
+            <div id="formulario-login" class="formulario">
+                <h2>Iniciar Sesión</h2>
+                <form>
+                    <div class="grupo-formulario">
+                        <label for="login_identifier">Email o Nombre de Usuario:</label>
+                        <input type="text" id="login_identifier" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="login_password">Contraseña:</label>
+                        <input type="password" id="login_password" required>
+                        <div class="checkbox-container">
+                            <label for="show_password_login">
+                                <input type="checkbox" id="show_password_login" onchange="togglePassword('login_password')">
+                                <span>Mostrar contraseña</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="button" onclick="login()" class="btn-login">Iniciar Sesión</button>
+                </form>
+            </div>
+
+            <div id="formulario-registro" class="formulario" style="display: none;">
+                <h2>Crear Cuenta</h2>
+                <form>
+                    <div class="grupo-formulario">
+                        <label for="username">Nombre de Usuario:</label>
+                        <input type="text" id="register_username" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="email-registro">Email:</label>
+                        <input type="email" id="register_email" required>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="password-registro">Contraseña:</label>
+                        <input type="password" id="register_password" required>
+                        <div class="checkbox-container">
+                            <label for="show_password_register">
+                                <input type="checkbox" id="show_password_register" onchange="togglePassword('register_password')">
+                                <span>Mostrar contraseña</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="register()">Registrarse</button>
+                </form>
+            </div>
+            <div class="message" id="message"></div>
+        </div>
+
+        <script src="../../assets/js/auth.js"></script>
+        <script src="../../assets/js/login.js"></script>
+        
+        <script>
+            // Verificar sesión y redirigir si es necesario
+            if (Auth.isAuthenticated()) {
+                window.location.replace('http://localhost:8012/Tricosaurus/frontend/index.html');
+            }
+        </script>
+
+    </main>
+
+</body>
+
+</html>
+

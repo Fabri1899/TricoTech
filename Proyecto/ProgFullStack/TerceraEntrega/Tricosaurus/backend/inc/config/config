@@ -1,0 +1,9 @@
+{
+  "conectionDB": {
+    "server": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "tricosaurus",
+    "port": 3306
+  }
+}

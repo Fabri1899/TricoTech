@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modo Seguimiento - Draftosaurus</title>
+    <link rel="icon" type="image/png" href="http://localhost:8012/Tricosaurus/frontend/assets/images/logos/logo.png">
+    <link rel="stylesheet" href="http://localhost:8012/Tricosaurus/frontend/assets/css/styles.css">
+    <link rel="stylesheet" href="http://localhost:8012/Tricosaurus/frontend/assets/css/seguimiento.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <nav class="barra-navegacion">
+        <input type="checkbox" class="toggle-hamburguesa" id="toggle-hamburguesa">
+        <label for="toggle-hamburguesa" class="hamburguesa">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul>
+            <li><a href="../../index.html">Inicio</a></li>
+            <li><a href="../howPlay.html">¿Cómo jugar?</a></li>
+            <li><a href="../user/user_access.html" class="active" title="Mi Cuenta"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+    </nav>
+
+    <main class="contenedor">
+        <section class="seguimiento-layout">
+            <aside class="seguimiento-sidebar">
+                <h2>Modo Seguimiento</h2>
+
+                <div class="control-group">
+                    <label for="selectJugadores">Jugadores</label>
+                    <select id="selectJugadores">
+                        <option value="2">2 jugadores</option>
+                        <option value="3">3 jugadores</option>
+                        <option value="4">4 jugadores</option>
+                        <option value="5">5 jugadores</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="selectRonda">Ronda</label>
+                    <select id="selectRonda"></select>
+                </div>
+
+                <div class="control-actions">
+                    <button class="btn primary" onclick="guardarRonda()">Guardar Ronda</button>
+                    <button class="btn" onclick="deshacerCambio()">Deshacer</button>
+                    <button class="btn" onclick="restaurarRonda()">Restaurar</button>
+                </div>
+
+                <div class="control-group">
+                    <label>King</label>
+                    <div class="king-check">
+                        <label>
+                            <input type="checkbox" id="kingCheck"> ¿Tienes al rey?
+                        </label>
+                    </div>
+                </div>
+
+                <div class="puntajes-box">
+                    <h3>Puntajes</h3>
+                    <div id="puntajes" class="puntajes-container"></div>
+                </div>
+
+                <div class="partidas-box">
+                    <h3>Partidas Guardadas</h3>
+                    <div class="partidas-actions">
+                        <button id="btnGuardarPartida" class="btn primary">Guardar partida</button>
+                        <button id="btnRestaurarPartida" class="btn">Cargar partidas</button>
+                    </div>
+                    <div id="partidasDisponibles" class="partidas-list"></div>
+                </div>
+            </aside>
+
+            <main class="seguimiento-main">
+                <!-- Selector de ronda cuando se carga una partida guardada -->
+                <div id="selector-ronda-cargada" class="selector-ronda-cargada" style="display: none;">
+                    <label for="selectRondaCargada"><strong>Seleccionar Ronda:</strong></label>
+                    <select id="selectRondaCargada"></select>
+                </div>
+
+                <!-- Vista normal (un solo tablero) -->
+                <div id="vista-normal" class="vista-normal">
+                    <div class="dinosaurs-panel">
+                        <h4>Dinosaurios disponibles</h4>
+                        <div id="contenedor-dinosaurio" class="dino-container"></div>
+                    </div>
+
+                    <div class="board-panel">
+                        <div class="board-card">
+                            <div class="board-header">
+                                <h3>Tablero</h3>
+                                <div class="board-help">Arrastra los dinosaurios a los recintos</div>
+                            </div>
+                            <div class="contenedor-tablero seguimiento-tablero" id="tablero"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vista de partida cargada (múltiples tableros) -->
+                <div id="vista-partida-cargada" class="vista-partida-cargada" style="display: none;">
+                    <div id="tableros-jugadores" class="tableros-jugadores-container"></div>
+                </div>
+            </main>
+        </section>
+
+        <div id="seguimiento-message" class="seguimiento-message" aria-live="polite"></div>
+
+        <script src="http://localhost:8012/Tricosaurus/frontend/assets/js/scriptSeguimiento.js"></script>
+
+    </main>
+
+</body>
+
+</html>
+

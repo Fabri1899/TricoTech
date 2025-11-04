@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modo Juego - Draftosaurus</title>
+    <link rel="icon" type="image/png" href="http://localhost:8012/Tricosaurus/frontend/assets/images/logos/logo.png">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/seguimiento.css">
+    <link rel="stylesheet" href="../../assets/css/game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <nav class="barra-navegacion">
+        <input type="checkbox" class="toggle-hamburguesa" id="toggle-hamburguesa">
+        <label for="toggle-hamburguesa" class="hamburguesa">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul>
+            <li><a href="../../index.html">Inicio</a></li>
+            <li><a href="../howPlay.html">¿Cómo jugar?</a></li>
+            <li><a href="#" id="cuenta-link" title="Mi Cuenta"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+    </nav>
+
+    <main class="contenedor">
+        <section class="game-layout">
+            <aside class="game-sidebar">
+                <h2>Modo Juego</h2>
+
+                <div class="control-group">
+                    <label for="selectJugadores">Cantidad de Jugadores</label>
+                    <select id="selectJugadores">
+                        <option value="2">2 jugadores</option>
+                        <option value="3">3 jugadores</option>
+                        <option value="4">4 jugadores</option>
+                        <option value="5">5 jugadores</option>
+                    </select>
+                </div>
+
+                <!-- Formularios de Login de Jugadores -->
+                <div id="jugadores-login-container" class="jugadores-login-container">
+                    <h3>Login de Jugadores</h3>
+                    <div id="jugadores-resumen" style="margin-bottom: 15px; padding: 10px; background: #e8f5e9; border-radius: 5px; display: none;">
+                        <strong>Jugadores Logueados:</strong>
+                        <div id="jugadores-resumen-lista"></div>
+                    </div>
+                    <div id="jugadores-login-forms"></div>
+                </div>
+
+                <!-- Botones de partida -->
+                <div id="crear-partida-container" class="control-group" style="display: none;">
+                    <button id="btnCrearPartida" class="btn primary" style="width: 100%; padding: 15px; font-size: 16px; margin-bottom: 10px;">
+                        Crear Partida
+                    </button>
+                    <button id="btnReanudarPartida" class="btn" style="width: 100%; padding: 15px; font-size: 16px; margin-bottom: 10px;">
+                        Reanudar Partida
+                    </button>
+                    <button id="btnRestaurarPartida" class="btn" style="width: 100%; padding: 15px; font-size: 16px;">
+                        Restaurar Partida
+                    </button>
+                </div>
+            </aside>
+
+            <main class="game-main">
+                <!-- Contenido del juego aparecerá aquí después de crear la partida -->
+                <div id="game-content-placeholder" class="game-placeholder">
+                    <h2>Esperando login de jugadores...</h2>
+                    <p>Selecciona la cantidad de jugadores y completa el login de cada uno para comenzar.</p>
+                </div>
+                
+                <!-- Panel de información de la partida -->
+                <div id="game-info-panel" class="game-info-panel" style="display: none;">
+                    <div class="info-item">
+                        <strong>Ronda:</strong> <span id="info-ronda">1</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Turno de:</strong> <span id="info-jugador-activo">-</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Dinosaurios en tablero:</strong> <span id="info-dinos-tablero">0/6</span>
+                    </div>
+                </div>
+
+                <!-- Bolsa del jugador activo -->
+                <div id="bolsa-jugador-activo-panel" class="bolsa-jugador-activo-panel" style="display: none;">
+                    <h3>Tu Bolsa - <span id="bolsa-jugador-nombre">Jugador</span></h3>
+                    <div id="bolsaJugadorActivo" class="bolsa-container"></div>
+                </div>
+
+                <!-- Selector de ronda cuando se carga una partida guardada -->
+                <div id="selector-ronda-cargada" class="selector-ronda-cargada" style="display: none;">
+                    <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                        <div>
+                            <label for="selectRondaCargada"><strong>Seleccionar Ronda:</strong></label>
+                            <select id="selectRondaCargada"></select>
+                        </div>
+                        <div>
+                            <label for="selectJugadorCargado"><strong>Ver Jugador:</strong></label>
+                            <select id="selectJugadorCargado">
+                                <option value="todos">Todos los Jugadores</option>
+                            </select>
+                        </div>
+                        <button id="btnVolverAJugar" class="btn">Volver a Jugar</button>
+                    </div>
+                </div>
+
+                <!-- Vista de revisión de partida cargada (múltiples tableros) -->
+                <div id="vista-partida-cargada" class="vista-partida-cargada" style="display: none;">
+                    <div id="tableros-jugadores" class="tableros-jugadores-container"></div>
+                </div>
+
+                <!-- Tablero del jugador activo (estilo modo seguimiento) -->
+                <div id="tablero-jugador-activo-panel" class="tablero-jugador-activo-panel" style="display: none;">
+                    <div class="dinosaurs-panel">
+                        <h4>Dinosaurios disponibles (de tu bolsa)</h4>
+                        <div id="contenedor-dinosaurio" class="dino-container"></div>
+                    </div>
+
+                    <div class="board-panel">
+                        <div class="board-card">
+                            <div class="board-header">
+                                <h3>Tu Tablero</h3>
+                                <div class="board-help">Arrastra los dinosaurios a los recintos</div>
+                            </div>
+                            <div class="contenedor-tablero seguimiento-tablero" id="tablero-activo"></div>
+                        </div>
+                    </div>
+
+                    <!-- Botón de guardar partida -->
+                    <div class="game-actions-turno" style="margin-top: 20px;">
+                        <button id="btnGuardarPartida" class="btn primary" style="width: 100%; padding: 15px; font-size: 16px;">
+                            Guardar Partida
+                        </button>
+                    </div>
+
+                    <!-- Puntajes -->
+                    <div class="puntajes-box" style="margin-top: 20px;">
+                        <h3>Puntajes</h3>
+                        <div id="puntajes" class="puntajes-container"></div>
+                    </div>
+                </div>
+            </main>
+        </section>
+
+        <div id="game-message" class="game-message" aria-live="polite"></div>
+    </main>
+
+    <script src="../../assets/js/auth.js"></script>
+    <script src="../../assets/js/scriptGame.js"></script>
+
+</body>
+
+</html>

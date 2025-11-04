@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Usuario - Tricosaurus</title>
+    <link rel="icon" type="image/png" href="http://localhost:8012/Tricosaurus/frontend/assets/images/logos/logo.png">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .user-panel {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+        }
+
+        .user-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .user-header h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        .user-info-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-details h2 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+
+        .user-details p {
+            margin: 0;
+            color: #666;
+        }
+
+        .user-info {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn-update {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-update:hover {
+            background-color: #45a049;
+        }
+
+        .btn-logout {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-logout:hover {
+            background-color: #da190b;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            color: #3c763d;
+        }
+
+        .alert-error {
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+            color: #a94442;
+        }
+
+        .partidas-section {
+            margin-top: 40px;
+        }
+
+        .partidas-actions {
+            margin-bottom: 20px;
+        }
+
+        .partidas-actions button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            background-color: #667eea;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .partidas-actions button:hover {
+            background-color: #5568d3;
+        }
+
+        .partidas-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .partida-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .partida-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .partida-item h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .partida-item p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .partida-id {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .no-partidas {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <nav class="barra-navegacion">
+        <input type="checkbox" class="toggle-hamburguesa" id="toggle-hamburguesa">
+        <label for="toggle-hamburguesa" class="hamburguesa">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul>
+            <li><a href="../../index.html">Inicio</a></li>
+            <li><a href="../howPlay.html">¿Cómo jugar?</a></li>
+            <li><a href="#" id="cuenta-link" class="active" title="Mi Cuenta"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="contenedor">
+            <div class="user-panel">
+                <div class="user-header">
+                    <h1>Panel de Usuario</h1>
+                    <div class="user-info-card" id="user-info-card">
+                        <div class="user-avatar" id="user-avatar">?</div>
+                        <div class="user-details">
+                            <h2 id="user-name">Cargando...</h2>
+                            <p id="user-email">Cargando email...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="alert" class="alert"></div>
+
+                <div class="user-info">
+                    <h2 class="section-title">Información Personal</h2>
+                    <form id="userUpdateForm">
+                        <div class="form-group">
+                            <label for="username">Nombre de Usuario</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currentPassword">Contraseña Actual</label>
+                            <input type="password" id="currentPassword" name="currentPassword">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="newPassword">Nueva Contraseña (dejar en blanco si no desea cambiarla)</label>
+                            <input type="password" id="newPassword" name="newPassword">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar Nueva Contraseña</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword">
+                        </div>
+
+                        <button type="submit" class="btn-update">Actualizar Datos</button>
+                    </form>
+                    <button onclick="Auth.logout()" class="btn-logout">Cerrar Sesión</button>
+                </div>
+
+                <div class="partidas-section">
+                    <h2 class="section-title">Mis Partidas Guardadas</h2>
+                    <div class="partidas-actions">
+                        <button onclick="cargarPartidas()" class="btn-update" style="background-color: #667eea;">
+                            <i class="fa-solid fa-refresh"></i> Cargar Partidas
+                        </button>
+                    </div>
+                    <div id="partidasDisponibles" class="partidas-list">
+                        <div class="no-partidas">Haz clic en "Cargar Partidas" para ver tus partidas guardadas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/js/auth.js"></script>
+    <script>
+        const API_URL = 'http://localhost:8012/Tricosaurus/backend/api/index.php';
+
+        // Verificar si el usuario está logueado
+        document.addEventListener('DOMContentLoaded', function() {
+            // La verificación del token ya la hace auth.js
+            // Cargar datos del usuario
+            loadUserData();
+            // Cargar partidas automáticamente
+            cargarPartidas();
+        });
+
+        function updateUserDisplay(user) {
+            const avatar = document.getElementById('user-avatar');
+            const name = document.getElementById('user-name');
+            const email = document.getElementById('user-email');
+
+            if (user.username) {
+                avatar.textContent = user.username.charAt(0).toUpperCase();
+                name.textContent = user.username;
+                email.textContent = user.email || 'Sin email';
+            }
+        }
+
+        function loadUserData() {
+            fetch(`${API_URL}?path=auth/session`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401 || response.status === 403) {
+                        throw { authError: true };
+                    }
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success && data.authenticated && data.user) {
+                    // Actualizar los campos del formulario
+                    document.getElementById('username').value = data.user.username;
+                    document.getElementById('email').value = data.user.email;
+                    // Actualizar el localStorage con los datos actualizados
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    // Actualizar la visualización del usuario
+                    updateUserDisplay(data.user);
+                } else {
+                    showAlert(data.message || 'No se pudieron obtener los datos del usuario', 'error');
+                }
+            })
+            .catch(err => {
+                if (err && err.authError) {
+                    console.warn('Token inválido o expirado, cerrando sesión');
+                    Auth.logout();
+                    return;
+                }
+                console.error('Error al cargar datos:', err);
+                showAlert('Error al cargar los datos del usuario', 'error');
+            });
+        }
+
+        async function cargarPartidas() {
+            try {
+                const response = await fetch(`${API_URL}?path=partidas`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${text}`);
+                }
+
+                const text = await response.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (parseErr) {
+                    console.error('Respuesta no-JSON del servidor al listar partidas:', text);
+                    throw new Error('Respuesta no válida del servidor (no-JSON)');
+                }
+
+                if (!data.success) {
+                    if (data.message && data.message.toLowerCase().includes('usuario no logueado')) {
+                        showAlert('No estás logueado. Por favor inicia sesión.', 'error');
+                        Auth.logout();
+                    } else {
+                        showAlert('Error: ' + data.message, 'error');
+                    }
+                    return;
+                }
+
+                const cont = document.getElementById("partidasDisponibles");
+                cont.innerHTML = "";
+
+                if (!data.data || data.data.length === 0) {
+                    cont.innerHTML = '<div class="no-partidas">No tienes partidas guardadas aún. ¡Comienza a jugar para guardar tus partidas!</div>';
+                    return;
+                }
+
+                data.data.forEach(p => {
+                    const div = document.createElement("div");
+                    div.className = "partida-item";
+                    div.dataset.id = p.id;
+                    div.dataset.tipo = p.tipo || 'seguimiento';
+                    
+                    // Formatear fecha
+                    const fecha = p.fecha ? new Date(p.fecha).toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }) : 'Sin fecha';
+                    
+                    // Determinar el tipo de partida y estilo
+                    const tipoPartida = p.tipo || 'seguimiento';
+                    const tipoLabel = tipoPartida === 'juego' ? 'Modo Juego' : 'Modo Seguimiento';
+                    const tipoColor = tipoPartida === 'juego' ? '#667eea' : '#4CAF50';
+                    const tipoIcon = tipoPartida === 'juego' ? 'fa-gamepad' : 'fa-chart-line';
+                    
+                    div.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h3 style="margin: 0;"><span class="partida-id">Partida #${p.id}</span></h3>
+                            <span style="background: ${tipoColor}; color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.85em; font-weight: bold;">
+                                <i class="fa-solid ${tipoIcon}"></i> ${tipoLabel}
+                            </span>
+                        </div>
+                        <p><strong>Fecha:</strong> ${fecha}</p>
+                        <p><strong>Jugadores:</strong> ${p.cant_jugadores}</p>
+                        <p><strong>Rondas:</strong> ${p.cant_rondas || 'N/A'}</p>
+                    `;
+
+                    div.addEventListener("click", () => {
+                        // Redirigir al modo correcto según el tipo de partida
+                        if (tipoPartida === 'juego') {
+                            window.location.href = `../modes/game.html?partida=${p.id}`;
+                        } else {
+                            window.location.href = `../modes/modoSeguimiento.html?partida=${p.id}`;
+                        }
+                    });
+                    
+                    cont.appendChild(div);
+                });
+            } catch (err) {
+                console.error('Error al cargar partidas:', err);
+                showAlert('Error al cargar partidas: ' + err.message, 'error');
+            }
+        }
+
+        document.getElementById('userUpdateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                currentPassword: document.getElementById('currentPassword').value,
+                newPassword: document.getElementById('newPassword').value,
+                confirmPassword: document.getElementById('confirmPassword').value
+            };
+
+            // Validar que las contraseñas coincidan si se está intentando cambiar
+            if (formData.newPassword) {
+                if (formData.newPassword !== formData.confirmPassword) {
+                    showAlert('Las contraseñas nuevas no coinciden', 'error');
+                    return;
+                }
+                if (!formData.currentPassword) {
+                    showAlert('Debe proporcionar la contraseña actual para cambiarla', 'error');
+                    return;
+                }
+            }
+
+            // Determinar qué actualizar según los campos proporcionados
+            let updatePromises = [];
+            
+            // Si se proporcionó nueva contraseña, actualizar contraseña
+            if (formData.newPassword) {
+                updatePromises.push(
+                    fetch(`${API_URL}?path=auth/update-password`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            password: formData.currentPassword,
+                            newPassword: formData.newPassword
+                        })
+                    })
+                );
+            }
+            
+            // Actualizar username si es diferente (verificar desde localStorage primero)
+            const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+            if (formData.username && formData.username !== storedUser.username) {
+                updatePromises.push(
+                    fetch(`${API_URL}?path=auth/update-username`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            username: formData.username,
+                            password: formData.currentPassword || ''
+                        })
+                    })
+                );
+            }
+            
+            // Actualizar email si es diferente
+            if (formData.email && formData.email !== storedUser.email) {
+                updatePromises.push(
+                    fetch(`${API_URL}?path=auth/update-email`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            email: formData.email,
+                            password: formData.currentPassword || ''
+                        })
+                    })
+                );
+            }
+            
+            if (updatePromises.length === 0) {
+                showAlert('No hay cambios para guardar', 'error');
+                return;
+            }
+            
+            // Ejecutar todas las actualizaciones
+            Promise.all(updatePromises.map(p => p.then(r => r.json())))
+            .then(results => {
+                // Verificar si todas las actualizaciones fueron exitosas
+                const allSuccess = results.every(result => result && result.success);
+                const errors = results.filter(result => !result || !result.success);
+                
+                if (allSuccess) {
+                    showAlert('Datos actualizados correctamente', 'success');
+                    // Limpiar campos de contraseña
+                    document.getElementById('currentPassword').value = '';
+                    document.getElementById('newPassword').value = '';
+                    document.getElementById('confirmPassword').value = '';
+                    // Recargar datos del usuario
+                    loadUserData();
+                } else {
+                    const errorMessages = errors.map(e => e.message || 'Error desconocido').join('; ');
+                    showAlert(errorMessages || 'Error al actualizar algunos datos', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error al actualizar:', error);
+                showAlert('Error al actualizar los datos', 'error');
+            });
+        });
+
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = `alert alert-${type}`;
+            alert.style.display = 'block';
+
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

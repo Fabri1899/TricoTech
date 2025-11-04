@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido - Draftosaurus</title>
+    <link rel="icon" type="image/png" href="http://localhost:8012/Tricosaurus/frontend/assets/images/logos/logo.png">
+    <link rel="stylesheet" href="http://localhost:8012/Tricosaurus/frontend/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <nav class="barra-navegacion">
+        <input type="checkbox" class="toggle-hamburguesa" id="toggle-hamburguesa">
+        <label for="toggle-hamburguesa" class="hamburguesa">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul>
+            <li>                <a href="http://localhost:8012/Tricosaurus/frontend/index.html">Inicio</a></li>
+            <li><a href="pages/howPlay.html">¿Cómo jugar?</a></li>
+            <li><a href="#" id="cuenta-link" class="active" title="Mi Cuenta"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <div class="contenedor">
+            <div id="contenido-bienvenida">
+                <h1>Bienvenido a Draftosaurus!</h1>
+                <p>Preparate para jugar y divertirte</p>
+                <button onclick="mostrarModosJuego()">Comenzar Juego</button>
+            </div>
+
+            <div id="modos-juego" style="display: none;">
+                <h2>Elegir modo de juego</h2>
+                <div class="botones-modos">
+                    <button class="btn-modo" onclick="seleccionarModo('game')">Modo Juego</button>
+                    <button class="btn-modo" onclick="seleccionarModo('tracing')">Modo Seguimiento</button>
+                </div>
+                <button class="btn-volver" onclick="volverInicio()">Volver</button>
+            </div>
+        </div>
+
+        <script src="http://localhost:8012/Tricosaurus/frontend/assets/js/auth.js"></script>
+        <script src="http://localhost:8012/Tricosaurus/frontend/assets/js/script.js"></script>
+        <script src="http://localhost:8012/Tricosaurus/frontend/assets/js/game.js"></script>
+
+    </main>
+
+</body>
+
+</html>
+
