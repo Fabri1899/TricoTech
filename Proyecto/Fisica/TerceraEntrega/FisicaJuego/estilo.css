@@ -1,0 +1,179 @@
+:root{
+  --bg-1: #e9fbf2;
+  --bg-2: #f7fdff;
+  --panel-bg: rgba(255,255,255,0.85);
+  --accent-green: #4caf50;
+  --accent-green-dark: #2f8a46;
+  --accent-blue: #3b82f6;
+  --accent-blue-dark: #2563eb;
+  --text: #23303a;
+  --muted: #6b7280;
+  --card-shadow: 0 14px 40px rgba(17,24,39,0.08);
+  --radius: 16px;
+  --glass: rgba(255,255,255,0.75);
+  --input-shadow: 0 8px 20px rgba(0,0,0,0.04);
+  --button-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  margin:0;
+  background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  font-family:"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+
+.contenedor{
+  max-width:1200px;
+  margin:24px auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:380px 1fr;
+  gap:24px;
+  align-items:start;
+}
+
+.card, .panel{
+  background:var(--panel-bg);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:var(--card-shadow);
+  border:1px solid rgba(17,24,39,0.05);
+  transition:transform 0.15s, box-shadow 0.2s;
+}
+.panel:hover{transform:translateY(-2px);box-shadow:0 20px 48px rgba(17,24,39,0.12);}
+
+h1{font-size:20px;color:var(--accent-blue);margin-bottom:16px;text-align:center}
+label{
+  display:block;
+  font-size:14px;
+  color:var(--muted);
+  margin:12px 0 6px;
+}
+
+input[type="number"], select{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(17,24,39,0.08);
+  background:linear-gradient(180deg,#ffffff,#f4faff);
+  font-size:15px;
+  color:var(--text);
+  box-shadow:var(--input-shadow);
+  transition:box-shadow .2s, transform .08s, border-color .15s;
+}
+input[type="number"]:focus, select:focus{
+  outline:none;
+  box-shadow:0 0 15px rgba(59,130,246,0.25);
+  transform:translateY(-1px);
+  border-color:rgba(59,130,246,0.25);
+}
+
+.botones{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+
+button#calcular, button#animar{
+  flex:1;
+  padding:14px 16px;
+  border-radius:14px;
+  border:0;
+  font-weight:800;
+  font-size:15px;
+  color:#fff;
+  cursor:pointer;
+  box-shadow:var(--button-shadow);
+  transition:transform .08s, box-shadow .2s, filter .08s;
+}
+button#calcular:active, button#animar:active{transform:translateY(1px)}
+
+button#calcular{
+  background:linear-gradient(180deg,var(--accent-green),var(--accent-green-dark));
+}
+button#animar{
+  background:linear-gradient(180deg,var(--accent-blue),var(--accent-blue-dark));
+}
+button#calcular:hover{filter:brightness(1.06);box-shadow:0 16px 36px rgba(46,125,50,0.18);}
+button#animar:hover{filter:brightness(1.06);box-shadow:0 16px 36px rgba(37,99,235,0.18);}
+
+.resultado, .hud{
+  margin-top:16px;
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#ffffff,#f4fff9);
+  border:1px solid rgba(17,24,39,0.04);
+  font-size:15px;
+  color:var(--text);
+  line-height:1.5;
+  box-shadow:0 4px 12px rgba(0,0,0,0.04);
+}
+
+.nota{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:8px;
+  line-height:1.4;
+}
+
+.lienzo-wrap{display:flex;flex-direction:column;gap:12px}
+
+#lienzo{
+  width:100%;
+  height:560px;
+  border-radius:18px;
+  background:
+    radial-gradient(900px 280px at 10% 8%, rgba(59,130,246,0.05), transparent 15%),
+    linear-gradient(180deg,#ffffff,#f8fffb);
+  border:1px solid rgba(17,24,39,0.05);
+  box-shadow:var(--card-shadow);
+  display:block;
+}
+
+.info-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+.info-chip{
+  padding:6px 12px;
+  border-radius:999px;
+  background:var(--glass);
+  color:var(--accent-green);
+  border:1px solid rgba(17,24,39,0.03);
+  font-weight:700;
+  font-size:0.92rem;
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  background:#fff;
+  color:var(--accent-blue);
+  font-weight:800;
+  border:1px solid rgba(17,24,39,0.03);
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.logo img {
+    max-width: 140px;
+    height: auto;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+
+
+@media (max-width:920px){
+  .contenedor{grid-template-columns:1fr;padding:16px;}
+  #lienzo{height:420px}
+}

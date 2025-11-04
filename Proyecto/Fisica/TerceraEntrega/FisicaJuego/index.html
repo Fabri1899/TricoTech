@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Simulador: resorte y dado</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="panel" aria-label="Controles">
+            <div class="logo">
+                <img src="logo.png" alt="Logo del equipo" />
+            </div>
+            <h1>Simulación: resorte lanza dado</h1>
+
+
+            <label<z for="k">Constante del resorte k (N/m)</label>
+                <input id="k" type="number" value="200" step="any" min="0">
+
+                <label for="dL">Compresión ΔL (m)</label>
+                <input id="dL" type="number" value="0.05" step="any" min="0">
+
+                <label for="m">Masa del dado m (kg)</label>
+                <input id="m" type="number" value="0.05" step="any" min="0">
+
+                <label for="h">Altura de salida h (m)</label>
+                <input id="h" type="number" value="0.5" step="any" min="0">
+
+                <label for="g">Gravedad g (m/s²)</label>
+                <input id="g" type="number" value="9.8" step="any" min="0">
+
+                <label for="dt">Paso de simulación dt (s)</label>
+                <input id="dt" type="number" value="0.02" step="any" min="0.001">
+
+                <div class="botones">
+                    <button id="calcular">Calcular</button>
+                    <button id="animar">Animar</button>
+                </div>
+
+                <div class="resultado" id="salida" aria-live="polite"></div>
+
+                <div class="nota">
+                    Fórmulas:<br>
+                    Energía potencial elástica: E<sub>el</sub> = ½·k·ΔL²<br>
+                    Energía potencial gravitatoria: E<sub>g</sub> = m·g·h<br>
+                    Energía mecánica inicial: E<sub>mec</sub> = E<sub>el</sub> + E<sub>g</sub> = ½·k·ΔL² + m·g·h<br>
+                    Energía cinética: E<sub>c</sub> = ½·m·v² → v = √(2·E<sub>mec</sub> / m)<br>
+                    Tiempo de caída: t = √(2·h/g)<br>
+                    Distancia horizontal aproximada: d = v·t
+                </div>
+
+
+        </div>
+
+        <div class="panel" aria-label="Visualización">
+            <canvas id="lienzo" width="1000" height="520" role="img" aria-label="Animación resorte y dado"></canvas>
+            <div class="nota" id="nota"></div>
+        </div>
+    </div>
+
+    <script src="simulador.js"></script>
+</body>
+
+</html>
